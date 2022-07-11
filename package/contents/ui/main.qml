@@ -75,7 +75,7 @@ PlasmaCore.Dialog {
             visible: mainDialog.headerVisible
 
             PlasmaComponents.Label {
-                text: " Exquisite"
+                text: "Window Tiling"
                 Layout.fillWidth: true
             }
 
