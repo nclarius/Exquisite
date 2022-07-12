@@ -97,6 +97,7 @@ PlasmaComponents.Button {
                         clickedWindows = [];
                         mainDialog.visible = false;
                     }
+                }
             }
         }
     }
