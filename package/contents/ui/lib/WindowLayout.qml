@@ -92,7 +92,8 @@ PlasmaComponents.Button {
                     }
 
                     if (!clickedWindows.includes(windows[index])) clickedWindows.push(windows[index]);
-
+                   
+                    if (hideOnFirstTile) mainDialog.visible = false;
                     if (hideOnLayoutTiled && clickedWindows.length === windows.length) {
                         clickedWindows = [];
                         mainDialog.visible = false;
