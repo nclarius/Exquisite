@@ -70,16 +70,33 @@ PlasmaComponents.Button {
                 Layout.columnSpan: windows[index].columnSpan
 
                 onClicked: {
-                    tileWindow(workspace.activeClient, windows[index].row, windows[index].rowSpan, windows[index].column, windows[index].columnSpan);
+                    let focusedWindow = workspace.activeClient;
+                    if (!focusedWindow.normalWindow) return;
+
+                    let screen = workspace.clientArea(KWin.MaximizeArea, workspace.activeScreen, focusedWindow.desktop);
+
+                    let xMult = screen.width / 12.0;
+                    let yMult = screen.height / 12.0;
+
+                    let newX = windows[index].column * xMult;
+                    let newY = windows[index].row * yMult;
+                    let newWidth = windows[index].rowSpan * xMult;
+                    let newHeight = windows[index].columnSpan * yMult;
+
+                    if (!(newWidth == screen.width && newHeight == screen.height)) {
+                        focusedWindow.setMaximize(false, false);
+                        focusedWindow.geometry = Qt.rect(screen.x + newX, screen.y + newY, newWidth, newHeight);
+                    }
+                    else {
+                        focusedWindow.setMaximize(true, true);
+                    }
 
                     if (!clickedWindows.includes(windows[index])) clickedWindows.push(windows[index]);
 
-                    if (hideOnFirstTile) mainDialog.visible = false;
                     if (hideOnLayoutTiled && clickedWindows.length === windows.length) {
                         clickedWindows = [];
                         mainDialog.visible = false;
                     }
-                }
             }
         }
     }
