@@ -40,7 +40,8 @@ PlasmaCore.Dialog {
     }
 
     function show() {
-        var screen = workspace.clientArea(KWin.FullScreenArea, workspace.activeScreen, workspace.currentDesktop);
+        // var screen = workspace.clientArea(KWin.FullScreenArea, workspace.activeScreen, workspace.currentDesktop);
+        var screen = workspace.activeClient;
         mainDialog.visible = true;
         if (position === 1) {
             mainDialog.x = screen.x + screen.width/2 - mainDialog.width/2;
