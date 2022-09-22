@@ -53,10 +53,10 @@ PlasmaCore.Dialog {
             mainDialog.x = screen.x + screen.width/2 - mainDialog.width/2;
             mainDialog.y = screen.y + screen.height - mainDialog.height;
         }
-        var cursorPos = workspace.mousePos();
+        var cursorPos = workspace.mousePos;
         if (cursorPos) {
             mainDialog.x = cursorPos.x - mainDialog.width/2;
-            mainDialog.y = cursorPos.y - mainDialog.height/2;
+            mainDialog.y = cursorPos.y - mainDiatlog.height/2;
         }
     }
 
