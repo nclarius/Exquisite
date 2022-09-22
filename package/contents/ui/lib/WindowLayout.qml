@@ -52,6 +52,9 @@ PlasmaComponents.Button {
 
             if (hideOnFirstTile || hideOnLayoutTiled) mainDialog.visible = false;
         }
+        if (windows[0].rowSpan == 0  && windows[0].columnSpan == 0) {
+            workspace.activeClient.minimized = true;
+        }
     }
 
     SpanGridLayout {
@@ -83,12 +86,15 @@ PlasmaComponents.Button {
                     let newWidth = windows[index].rowSpan * xMult;
                     let newHeight = windows[index].columnSpan * yMult;
 
-                    if (!(newWidth == screen.width && newHeight == screen.height)) {
-                        focusedWindow.setMaximize(false, false);
-                        focusedWindow.geometry = Qt.rect(screen.x + newX, screen.y + newY, newWidth, newHeight);
+                    if (newWidth == 0 && newHeight == 0) {
+                        focusedWindow.minimized = true;
+                    }
+                    else if (newWidth == screen.width && newHeight == screen.height) {
+                        focusedWindow.setMaximize(true, true);
                     }
                     else {
-                        focusedWindow.setMaximize(true, true);
+                        focusedWindow.setMaximize(false, false);
+                        focusedWindow.geometry = Qt.rect(screen.x + newX, screen.y + newY, newWidth, newHeight);
                     }
 
                     if (!clickedWindows.includes(windows[index])) clickedWindows.push(windows[index]);
